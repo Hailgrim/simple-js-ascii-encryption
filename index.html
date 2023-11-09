@@ -75,16 +75,17 @@
   <script>
     function encrypt() {
       const text = document.querySelector('#decrypted')?.value;
+
       if (!text) {
         alert('Please, enter the encryption text!');
         return;
       }
 
-      const result = document.querySelector('#encrypted');
       let cursor = 0;
       let output = '';
-
+      const result = document.querySelector('#encrypted');
       const key = prompt('Enter the encryption key:', '');
+
       if (result && key) {
         for (let i = 0; i < text.length; i++) {
           if (cursor > (key.length - 1)) cursor = 0;
@@ -100,15 +101,17 @@
     }
     function decrypt() {
       const text = document.querySelector('#encrypted')?.value.split(' ');
+
       if (!text) {
         alert('Please, enter the encrypted text!');
         return;
       }
 
-      const result = document.querySelector('#decrypted');
       let cursor = 0;
       let output = '';
+      const result = document.querySelector('#decrypted');
       const key = prompt('Enter the decryption key:', '');
+
       if (result && key) {
         for (let i = 0; i < text.length; i++) {
           if (cursor > (key.length - 1)) { cursor = 0; }
