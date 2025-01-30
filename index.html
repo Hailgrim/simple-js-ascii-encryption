@@ -22,7 +22,7 @@
       background-color: black;
     }
 
-    body>div {
+    body>form {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
@@ -55,7 +55,7 @@
       background-color: transparent;
     }
 
-    button {
+    input[type="submit"] {
       width: 100%;
       padding: 1.2rem;
       font-family: Arial, Helvetica, sans-serif;
@@ -70,12 +70,14 @@
       transition: color ease-out 0.2s;
     }
 
-    button:hover {
+    input[type="submit"]:hover {
       color: lightgray;
     }
   </style>
   <script>
-    function encrypt() {
+    function encrypt(event) {
+      event.preventDefault();
+
       const text = document.querySelector('#decrypted')?.value;
 
       if (!text) {
@@ -95,13 +97,16 @@
           if (i != (text.length - 1)) output += ' ';
           cursor++;
         }
+
         result.value = output;
         alert('Done!');
       } else {
         alert('Please, enter the encryption key!');
       }
     }
-    function decrypt() {
+    function decrypt(event) {
+      event.preventDefault();
+
       const text = document.querySelector('#encrypted')?.value.split(' ');
 
       if (!text) {
@@ -116,10 +121,11 @@
 
       if (result && key) {
         for (let i = 0; i < text.length; i++) {
-          if (cursor > (key.length - 1)) { cursor = 0; }
+          if (cursor > (key.length - 1)) cursor = 0;
           output += String.fromCharCode(Math.abs(text[i] - key[cursor].charCodeAt(0)));
           cursor++;
         }
+
         result.value = output;
         alert('Done!');
       } else {
@@ -130,16 +136,16 @@
 </head>
 
 <body>
-  <div>
+  <form onsubmit="encrypt(event);">
     <h2>Decrypted</h2>
     <textarea id="decrypted" placeholder="Some text..."></textarea>
-    <button onclick="encrypt();">Encrypt</button>
-  </div>
-  <div>
+    <input type="submit" value="Encrypt" />
+  </form>
+  <form onsubmit="decrypt(event);">
     <h2>Encrypted</h2>
     <textarea id="encrypted" placeholder="97 18 44..."></textarea>
-    <button onclick="decrypt();">Decrypt</button>
-  </div>
+    <input type="submit" value="Decrypt" />
+  </form>
 </body>
 
 </html>
